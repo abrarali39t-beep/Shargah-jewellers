@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sharjah Jewellers – Be Precious, Be You</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  /* ── ROOT TOKENS ── */
+  :root {
+    --navy:    #07111f;
+    --navy2:   #0b1a2f;
+    --navy3:   #112240;
+    --navy4:   #1a3258;
+    --gold:    #d4af37;
+    --gold2:   #f0d060;
+    --gold3:   #b8922a;
+    --gold4:   #fde98a;
+    --cream:   #f8f0e3;
+    --white:   #ffffff;
+    --text:    #c9b99a;
+    --glass:   rgba(255,255,255,0.04);
+    --glass2:  rgba(212,175,55,0.08);
+    --shadow:  0 8px 48px rgba(0,0,0,0.6);
+    --glow:    0 0 30px rgba(212,175,55,0.25);
+    --radius:  16px;
+    --trans:   0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ul { list-style: none; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold3); border-radius: 3px; }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* ── GOLD DIVIDER ── */
+  .divider {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 1.5rem;
+  }
+  .divider-left { margin-left: 0; }
+
+  /* ── SECTION WRAPPER ── */
+  .section { position: relative; z-index: 1; padding: 100px 5vw; }
+  .section-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--white); margin-bottom: 1rem;
+  }
+  .section-title span { color: var(--gold); font-style: italic; }
+  .section-sub {
+    font-size: 0.95rem; font-weight: 300;
+    color: var(--text); max-width: 560px; line-height: 1.8;
+  }
+
+  /* ══════════════════════════════════════
+     NAV
+  ══════════════════════════════════════ */
+  #topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5vw;
+    background: rgba(7,17,31,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(212,175,55,0.12);
+    transition: padding var(--trans);
+  }
+  #topnav.scrolled { padding: 12px 5vw; }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+  .nav-brand span {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem; font-weight: 300; letter-spacing: 0.25em;
+    color: var(--text); text-transform: uppercase; margin-top: -2px;
+  }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--text); text-transform: uppercase;
+    position: relative; transition: color var(--trans);
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width var(--trans);
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    padding: 10px 24px; border: 1px solid var(--gold);
+    color: var(--gold) !important; border-radius: 50px;
+    font-size: 0.75rem !important; font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    transition: background var(--trans), color var(--trans) !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+  .nav-cta::after { display: none !important; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: var(--trans); }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 120px 5vw 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(17,34,64,0.9) 0%, var(--navy) 70%);
+  }
+  .hero-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.18; pointer-events: none;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px; top: -100px; left: -150px;
+    background: radial-gradient(circle, var(--gold3), transparent 70%);
+    animation: orbFloat 8s ease-in-out infinite;
+  }
+  .hero-orb-2 {
+    width: 500px; height: 500px; bottom: -80px; right: -100px;
+    background: radial-gradient(circle, var(--navy4), var(--gold3) 60%, transparent 80%);
+    animation: orbFloat 10s ease-in-out infinite reverse;
+  }
+  @keyframes orbFloat {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  /* diamond pattern */
+  .hero-diamonds {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: 0.07;
+  }
+  .hero-diamonds::before {
+    content: '';
+    position: absolute; inset: -50%;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 28px,
+      rgba(212,175,55,0.4) 28px, rgba(212,175,55,0.4) 30px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 28px,
+      rgba(212,175,55,0.4) 28px, rgba(212,175,55,0.4) 30px
+    );
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 0.7rem; letter-spacing: 0.4em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 1.6rem;
+    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 30px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--white); margin-bottom: 0.4rem;
+    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-title .gold { color: var(--gold); }
+  .hero-title .italic { font-style: italic; }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 300; font-style: italic;
+    color: var(--text); margin-bottom: 1.2rem;
+    opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+  }
+  .hero-subtitle {
+    font-size: 0.85rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase; font-weight: 400;
+    margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
+  }
+  .hero-subtitle .dot { color: var(--gold3); margin: 0 8px; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 44px; border-radius: 50px;
+    background: linear-gradient(135deg, var(--gold3), var(--gold), var(--gold2));
+    color: var(--navy); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    box-shadow: 0 0 40px rgba(212,175,55,0.35), 0 4px 20px rgba(0,0,0,0.4);
+    transition: transform var(--trans), box-shadow var(--trans);
+    opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
+    position: relative; overflow: hidden;
+  }
+  .hero-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--gold2), var(--gold4));
+    opacity: 0; transition: opacity var(--trans);
+  }
+  .hero-cta:hover::before { opacity: 1; }
+  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(212,175,55,0.5), 0 8px 30px rgba(0,0,0,0.5); }
+  .hero-cta span { position: relative; z-index: 1; }
+  .hero-cta-arrow { position: relative; z-index: 1; font-size: 1rem; transition: transform var(--trans); }
+  .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text); text-transform: uppercase;
+    animation: fadeUp 1s 1.5s both;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* ══════════════════════════════════════
+     MARQUEE STRIP
+  ══════════════════════════════════════ */
+  .marquee-wrap {
+    position: relative; z-index: 1;
+    background: linear-gradient(90deg, var(--gold3), var(--gold), var(--gold2), var(--gold), var(--gold3));
+    overflow: hidden; padding: 14px 0;
+  }
+  .marquee-inner {
+    display: flex; gap: 0; white-space: nowrap;
+    animation: marquee 25s linear infinite;
+  }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 20px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--navy); padding: 0 32px;
+  }
+  .marquee-sep { color: var(--navy3); font-size: 1rem; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ══════════════════════════════════════
+     ABOUT
+  ══════════════════════════════════════ */
+  #about {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto;
+  }
+  .about-visual {
+    position: relative; aspect-ratio: 4/5;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .about-visual-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--navy3) 0%, var(--navy4) 50%, var(--navy3) 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-gem {
+    font-size: 8rem; filter: drop-shadow(0 0 40px rgba(212,175,55,0.5));
+    animation: gemFloat 4s ease-in-out infinite;
+  }
+  @keyframes gemFloat { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
+  .about-visual::before {
+    content: ''; position: absolute; inset: 0; z-index: 2;
+    border: 1px solid rgba(212,175,55,0.25); border-radius: var(--radius);
+    pointer-events: none;
+  }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px; z-index: 3;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold3), var(--gold));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 4px 30px rgba(212,175,55,0.4);
+  }
+  .about-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--navy); line-height: 1;
+  }
+  .about-badge-txt { font-size: 0.6rem; font-weight: 600; color: var(--navy3); letter-spacing: 0.1em; text-transform: uppercase; }
+  .about-text .section-title { text-align: left; }
+  .about-text .divider { margin-left: 0; }
+  .about-text .section-sub { max-width: 100%; margin-bottom: 2rem; }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .about-stat { padding: 1.2rem; border: 1px solid rgba(212,175,55,0.15); border-radius: 12px; background: var(--glass2); }
+  .about-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--gold);
+  }
+  .about-stat-lbl { font-size: 0.72rem; color: var(--text); letter-spacing: 0.08em; }
+
+  /* ══════════════════════════════════════
+     COLLECTIONS
+  ══════════════════════════════════════ */
+  #collections { background: var(--navy2); }
+  .collections-header { text-align: center; margin-bottom: 60px; }
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .coll-card {
+    background: var(--glass);
+    border: 1px solid rgba(212,175,55,0.1);
+    border-radius: var(--radius);
+    padding: 36px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform var(--trans), border-color var(--trans), box-shadow var(--trans), background var(--trans);
+    position: relative; overflow: hidden;
+  }
+  .coll-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(212,175,55,0.02));
+    opacity: 0; transition: opacity var(--trans);
+  }
+  .coll-card:hover::before { opacity: 1; }
+  .coll-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212,175,55,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--glow);
+  }
+  .coll-icon {
+    font-size: 2.8rem; margin-bottom: 1rem;
+    display: block; filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
+    transition: transform var(--trans), filter var(--trans);
+  }
+  .coll-card:hover .coll-icon {
+    transform: scale(1.15) translateY(-4px);
+    filter: drop-shadow(0 0 20px rgba(212,175,55,0.6));
+  }
+  .coll-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--white);
+    margin-bottom: 0.4rem; position: relative; z-index: 1;
+  }
+  .coll-sub { font-size: 0.72rem; color: var(--text); position: relative; z-index: 1; }
+  .coll-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.3);
+    color: var(--gold); font-size: 0.8rem; margin-top: 1rem;
+    transition: background var(--trans), border-color var(--trans), transform var(--trans);
+    position: relative; z-index: 1;
+  }
+  .coll-card:hover .coll-arrow {
+    background: var(--gold); color: var(--navy);
+    border-color: var(--gold); transform: rotate(45deg);
+  }
+
+  /* ══════════════════════════════════════
+     WHY CHOOSE US
+  ══════════════════════════════════════ */
+  #why {
+    background: linear-gradient(180deg, var(--navy2), var(--navy));
+    position: relative; overflow: hidden;
+  }
+  #why::before {
+    content: ''; position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .why-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .why-left .section-title { margin-bottom: 1.2rem; }
+  .why-points { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .why-point {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 20px; border-radius: 12px;
+    background: var(--glass); border: 1px solid rgba(212,175,55,0.08);
+    transition: border-color var(--trans), background var(--trans), transform var(--trans);
+    cursor: default;
+  }
+  .why-point:hover {
+    border-color: rgba(212,175,55,0.3);
+    background: var(--glass2);
+    transform: translateX(6px);
+  }
+  .why-icon {
+    width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold3), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .why-point-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+  .why-point-desc { font-size: 0.78rem; color: var(--text); }
+  .why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .why-feat {
+    padding: 32px 24px; border-radius: var(--radius);
+    background: var(--glass); border: 1px solid rgba(212,175,55,0.1);
+    text-align: center;
+    transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+  }
+  .why-feat:hover { transform: translateY(-6px); box-shadow: var(--glow); border-color: rgba(212,175,55,0.3); }
+  .why-feat:nth-child(2) { margin-top: 30px; }
+  .why-feat:nth-child(4) { margin-top: 30px; }
+  .why-feat-icon { font-size: 2.4rem; margin-bottom: 0.8rem; }
+  .why-feat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .why-feat-desc { font-size: 0.75rem; color: var(--text); line-height: 1.6; }
+
+  /* ══════════════════════════════════════
+     GOLD RATE
+  ══════════════════════════════════════ */
+  #gold-rate {
+    background: var(--navy2);
+  }
+  .rate-header { text-align: center; margin-bottom: 50px; }
+  .rate-wrap { max-width: 900px; margin: 0 auto; }
+  .rate-top-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; border-radius: 12px 12px 0 0;
+    background: linear-gradient(90deg, rgba(212,175,55,0.12), rgba(212,175,55,0.06));
+    border: 1px solid rgba(212,175,55,0.2); border-bottom: none;
+  }
+  .rate-top-label {
+    font-size: 0.72rem; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; font-weight: 600;
+  }
+  .rate-live-badge {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.68rem; letter-spacing: 0.15em; color: #4ade80; text-transform: uppercase;
+  }
+  .rate-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); } 50% { box-shadow: 0 0 0 8px rgba(74,222,128,0); } }
+  .rate-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border: 1px solid rgba(212,175,55,0.2); border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+  }
+  .rate-card {
+    padding: 36px 32px;
+    background: var(--glass);
+    position: relative; overflow: hidden;
+    transition: background var(--trans);
+  }
+  .rate-card:hover { background: var(--glass2); }
+  .rate-card + .rate-card { border-left: 1px solid rgba(212,175,55,0.15); }
+  .rate-card::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.08), transparent 70%);
+  }
+  .rate-karat {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .rate-karat-badge {
+    padding: 3px 10px; border-radius: 20px;
+    background: linear-gradient(90deg, var(--gold3), var(--gold));
+    color: var(--navy); font-size: 0.65rem; font-weight: 700;
+  }
+  .rate-price {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
+    color: var(--white); line-height: 1.1; margin-bottom: 0.4rem;
+  }
+  .rate-price .currency { font-size: 1.2rem; color: var(--gold); margin-right: 4px; }
+  .rate-price .per { font-size: 0.8rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 300; }
+  .rate-change {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.75rem; padding: 4px 12px; border-radius: 20px;
+    background: rgba(74,222,128,0.1); color: #4ade80; margin-bottom: 0.8rem;
+  }
+  .rate-update-time { font-size: 0.7rem; color: var(--text); }
+  .rate-footer {
+    text-align: center; margin-top: 1.5rem;
+    font-size: 0.72rem; color: var(--text); letter-spacing: 0.05em;
+  }
+  .rate-footer strong { color: var(--gold); }
+
+  /* CALCULATOR */
+  .calc-wrap {
+    margin-top: 40px; padding: 32px;
+    background: var(--glass); border: 1px solid rgba(212,175,55,0.12); border-radius: var(--radius);
+    max-width: 900px; margin: 40px auto 0;
+  }
+  .calc-title {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold);
+    margin-bottom: 1.5rem; text-align: center;
+  }
+  .calc-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+  .calc-field { flex: 1; min-width: 160px; }
+  .calc-field label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--text); text-transform: uppercase; margin-bottom: 8px; }
+  .calc-field select, .calc-field input {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2);
+    color: var(--white); font-family: 'Poppins', sans-serif; font-size: 0.9rem;
+    transition: border-color var(--trans);
+    appearance: none;
+  }
+  .calc-field select:focus, .calc-field input:focus { outline: none; border-color: var(--gold); }
+  .calc-field select option { background: var(--navy3); }
+  .calc-btn {
+    padding: 13px 32px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold3), var(--gold));
+    color: var(--navy); font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.08em; cursor: pointer; border: none;
+    transition: transform var(--trans), box-shadow var(--trans); white-space: nowrap;
+  }
+  .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.3); }
+  .calc-result {
+    margin-top: 1.5rem; padding: 20px 24px; border-radius: 12px;
+    background: rgba(212,175,55,0.07); border: 1px solid rgba(212,175,55,0.2);
+    display: none; text-align: center;
+  }
+  .calc-result.show { display: block; }
+  .calc-result-val {
+    font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-weight: 700;
+  }
+  .calc-result-label { font-size: 0.75rem; color: var(--text); margin-top: 4px; }
+
+  /* ══════════════════════════════════════
+     CONTACT
+  ══════════════════════════════════════ */
+  #contact { background: var(--navy); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: start; }
+  .contact-info { }
+  .contact-info .section-title { font-size: 2.4rem; }
+  .contact-info .section-sub { margin-top: 1rem; }
+  .contact-items { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 12px;
+    background: var(--glass); border: 1px solid rgba(212,175,55,0.1);
+  }
+  .contact-item-icon {
+    width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+    border: 1px solid rgba(212,175,55,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .contact-item-label { font-size: 0.68rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+  .contact-item-val { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+  .social-row { display: flex; gap: 12px; margin-top: 2rem; }
+  .social-btn {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-radius: 10px;
+    border: 1px solid rgba(212,175,55,0.2);
+    background: var(--glass); color: var(--text);
+    font-size: 0.8rem; font-weight: 500;
+    transition: all var(--trans);
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--glass2); transform: translateY(-3px); }
+  .contact-form {
+    padding: 36px; border-radius: var(--radius);
+    background: var(--glass); border: 1px solid rgba(212,175,55,0.12);
+  }
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .form-field { margin-bottom: 1.2rem; }
+  .form-field label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--text); text-transform: uppercase; margin-bottom: 8px; }
+  .form-field input, .form-field textarea, .form-field select {
+    width: 100%; padding: 13px 16px; border-radius: 10px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.15);
+    color: var(--white); font-family: 'Poppins', sans-serif; font-size: 0.88rem;
+    transition: border-color var(--trans); resize: vertical;
+  }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { outline: none; border-color: var(--gold); }
+  .form-field textarea { min-height: 110px; }
+  .form-submit {
+    width: 100%; padding: 15px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold3), var(--gold));
+    color: var(--navy); font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; border: none;
+    transition: transform var(--trans), box-shadow var(--trans);
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.35); }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  #footer {
+    position: relative; z-index: 1;
+    background: var(--navy);
+    border-top: 1px solid rgba(212,175,55,0.12);
+    padding: 60px 5vw 120px; /* extra bottom for sticky nav */
+  }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
+  .footer-brand .nav-brand { font-size: 1.6rem; margin-bottom: 0.8rem; display: block; }
+  .footer-brand p { font-size: 0.82rem; color: var(--text); line-height: 1.8; max-width: 260px; margin-top: 0.8rem; }
+  .footer-col h4 {
+    font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 1.2rem; font-weight: 600;
+  }
+  .footer-col ul { display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-col ul li a {
+    font-size: 0.82rem; color: var(--text);
+    transition: color var(--trans), padding-left var(--trans);
+    display: block;
+  }
+  .footer-col ul li a:hover { color: var(--gold); padding-left: 6px; }
+  .footer-bottom {
+    max-width: 1200px; margin: 40px auto 0;
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.75rem; color: var(--text);
+  }
+  .footer-bottom .gold { color: var(--gold); }
+
+  /* ══════════════════════════════════════
+     STICKY BOTTOM NAV
+  ══════════════════════════════════════ */
+  #bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(7,17,31,0.92); backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(212,175,55,0.15);
+    display: flex; align-items: stretch;
+    padding: 0 0 env(safe-area-inset-bottom, 0);
+  }
+  .bn-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 5px; padding: 10px 4px;
+    color: var(--text); font-size: 0.6rem; letter-spacing: 0.06em;
+    text-transform: uppercase; cursor: pointer;
+    transition: color var(--trans); text-decoration: none;
+    border: none; background: none; font-family: 'Poppins', sans-serif;
+  }
+  .bn-item:hover, .bn-item.active { color: var(--gold); }
+  .bn-icon { font-size: 1.2rem; transition: transform var(--trans); }
+  .bn-item:hover .bn-icon, .bn-item.active .bn-icon { transform: translateY(-3px); }
+  .bn-item.active .bn-icon { filter: drop-shadow(0 0 8px rgba(212,175,55,0.6)); }
+
+  /* ══════════════════════════════════════
+     ANIMATIONS
+  ══════════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ══════════════════════════════════════
+     MOBILE NAV OVERLAY
+  ══════════════════════════════════════ */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(7,17,31,0.97); backdrop-filter: blur(20px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2.5rem; transform: translateX(100%); transition: transform var(--trans);
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif; font-size: 2rem;
+    color: var(--white); transition: color var(--trans);
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close {
+    position: absolute; top: 24px; right: 5vw;
+    font-size: 2rem; color: var(--gold); cursor: pointer; background: none; border: none;
+  }
+
+  /* ══════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-visual { max-width: 400px; margin: 0 auto; }
+    .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .section { padding: 70px 5vw; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .rate-cards { grid-template-columns: 1fr; }
+    .rate-card + .rate-card { border-left: none; border-top: 1px solid rgba(212,175,55,0.15); }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    .why-right { grid-template-columns: 1fr 1fr; }
+    .why-feat:nth-child(2), .why-feat:nth-child(4) { margin-top: 0; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .social-row { flex-wrap: wrap; }
+    .calc-row { flex-direction: column; }
+    .calc-btn { width: 100%; }
+  }
+  @media (max-width: 480px) {
+    .collections-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-right { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════ TOP NAV ════════════ -->
+<nav id="topnav">
+  <div class="nav-brand">
+    Sharjah Jewellers
+    <span>Lal Chowk · Srinagar</span>
+  </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#collections">Collections</a>
+    <a href="#why">Why Us</a>
+    <a href="#gold-rate">Gold Rate</a>
+    <a href="#contact" class="nav-cta">Visit Us</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#collections" onclick="toggleMenu()">Collections</a>
+  <a href="#why" onclick="toggleMenu()">Why Us</a>
+  <a href="#gold-rate" onclick="toggleMenu()">Gold Rate</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- ════════════ HERO ════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-diamonds"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ Est. Since Decades ✦</div>
+    <h1 class="hero-title">
+      <span class="gold">Sharjah</span><br>
+      <span class="italic">Jewellers</span>
+    </h1>
+    <p class="hero-tagline">Be Precious, Be You</p>
+    <p class="hero-subtitle">
+      Italian<span class="dot">◆</span>Arabic<span class="dot">◆</span>Turkish<span class="dot">◆</span>Indian Made Jewellery
+    </p>
+    <a href="#collections" class="hero-cta">
+      <span>Explore Collection</span>
+      <span class="hero-cta-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ════════════ MARQUEE ════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-inner" id="marqueeInner">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ════════════ ABOUT ════════════ -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-visual-inner">
+        <span class="about-gem">💎</span>
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-num">25+</div>
+        <div class="about-badge-txt">Years</div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <p class="section-label">Our Story</p>
+      <div class="divider divider-left"></div>
+      <h2 class="section-title">Crafted with <span>Trust &amp; Passion</span></h2>
+      <p class="section-sub">
+        At Sharjah Jewellers, every piece is more than adornment — it is a legacy. Nestled in the heart of Lal Chowk, Srinagar, we have been curating heirloom-quality jewellery for over two decades, blending the finest artisanal traditions of Italy, Arabia, Turkey, and India into pieces that transcend time.
+      </p>
+      <p class="section-sub" style="margin-top:1rem;">
+        Our master craftsmen select only certified gold, silver, and precious stones, ensuring that every bracelet, necklace, and bridal set you carry holds not just beauty, but an unwavering promise of purity and excellence. We believe jewellery is the language of love — and we help you speak it flawlessly.
+      </p>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">10K+</div>
+          <div class="about-stat-lbl">Happy Clients</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">500+</div>
+          <div class="about-stat-lbl">Designs</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-lbl">Certified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ COLLECTIONS ════════════ -->
+<section class="section" id="collections">
+  <div class="collections-header reveal">
+    <p class="section-label">Discover</p>
+    <div class="divider"></div>
+    <h2 class="section-title">Our <span>Collections</span></h2>
+    <p class="section-sub" style="margin:0 auto; text-align:center;">Handpicked jewellery spanning every tradition, every occasion, every story.</p>
+  </div>
+  <div class="collections-grid" id="collGrid"></div>
+</section>
+
+<!-- ════════════ WHY CHOOSE US ════════════ -->
+<section class="section" id="why">
+  <div class="why-grid">
+    <div class="why-left reveal">
+      <p class="section-label">Why Us</p>
+      <div class="divider divider-left"></div>
+      <h2 class="section-title">The Sharjah <span>Promise</span></h2>
+      <p class="section-sub">We don't just sell jewellery. We craft experiences that become lifelong memories.</p>
+      <div class="why-points" id="whyPoints"></div>
+    </div>
+    <div class="why-right reveal" id="whyRight"></div>
+  </div>
+</section>
+
+<!-- ════════════ GOLD RATE ════════════ -->
+<section class="section" id="gold-rate">
+  <div class="rate-header reveal">
+    <p class="section-label">Market</p>
+    <div class="divider"></div>
+    <h2 class="section-title">Live <span>Gold Rates</span></h2>
+    <p class="section-sub" style="margin:0 auto; text-align:center;">Today's gold prices updated in real time. Plan your purchase wisely.</p>
+  </div>
+
+  <div class="rate-wrap reveal">
+    <div class="rate-top-bar">
+      <span class="rate-top-label">📍 Srinagar Market Rate · Per 10g (INR)</span>
+      <span class="rate-live-badge"><span class="rate-dot"></span> Live</span>
+    </div>
+    <div class="rate-cards">
+      <div class="rate-card">
+        <div class="rate-karat"><span class="rate-karat-badge">24K</span> Pure Gold</div>
+        <div class="rate-price" id="price24k">
+          <span class="currency">₹</span><span id="val24k">72,450</span>
+          <span class="per"> / 10g</span>
+        </div>
+        <div class="rate-change">▲ +₹120 Today</div>
+        <div class="rate-update-time" id="time24k">Updated just now</div>
+      </div>
+      <div class="rate-card">
+        <div class="rate-karat"><span class="rate-karat-badge" style="background:linear-gradient(90deg,#a07830,#c8a84b);">22K</span> Hallmark</div>
+        <div class="rate-price" id="price22k">
+          <span class="currency">₹</span><span id="val22k">66,380</span>
+          <span class="per"> / 10g</span>
+        </div>
+        <div class="rate-change">▲ +₹110 Today</div>
+        <div class="rate-update-time" id="time22k">Updated just now</div>
+      </div>
+    </div>
+    <div class="rate-footer">
+      Rates are indicative. Final pricing may vary. Contact us for exact buyback or purchase rates. <strong>+91-XXXXX-XXXXX</strong>
+    </div>
+  </div>
+
+  <!-- Calculator -->
+  <div class="calc-wrap reveal">
+    <div class="calc-title">💰 Gold Value Calculator</div>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>Karat</label>
+        <select id="calcKarat">
+          <option value="24">24K Pure Gold</option>
+          <option value="22" selected>22K Hallmark</option>
+          <option value="18">18K Gold</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Weight (grams)</label>
+        <input type="number" id="calcWeight" placeholder="e.g. 5" min="0.1" step="0.1" />
+      </div>
+      <div class="calc-field">
+        <label>Making Charges (%)</label>
+        <input type="number" id="calcMaking" placeholder="e.g. 12" min="0" step="0.5" value="12" />
+      </div>
+      <button class="calc-btn" onclick="calcGold()">Calculate</button>
+    </div>
+    <div class="calc-result" id="calcResult">
+      <div class="calc-result-val" id="calcVal">₹0</div>
+      <div class="calc-result-label" id="calcBreakdown">Estimated value</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CONTACT ════════════ -->
+<section class="section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <p class="section-label">Get in Touch</p>
+      <div class="divider divider-left"></div>
+      <h2 class="section-title">Visit Our <span>Store</span></h2>
+      <p class="section-sub">Come experience the finest jewellery collection in Kashmir. Our team is always ready to help you find the perfect piece.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-val">Lal Chowk, Srinagar, J&amp;K</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-val">+91-XXXXX-XXXXX</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Hours</div>
+            <div class="contact-item-val">Mon – Sat: 10 AM – 8 PM</div>
+          </div>
+        </div>
+      </div>
+      <div class="social-row">
+        <a href="#" class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Instagram
+        </a>
+        <a href="#" class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://wa.me/91XXXXXXXXXX" class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.847 5.059 2.284 7.034L.785 23.5l4.586-1.478A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.032-1.382l-.36-.214-3.734 1.203 1.175-3.64-.234-.374A9.774 9.774 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <h3>Send a Message</h3>
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" placeholder="e.g. Aisha Rehman" />
+      </div>
+      <div class="form-field">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX" />
+      </div>
+      <div class="form-field">
+        <label>I'm Interested In</label>
+        <select>
+          <option>Bridal Sets</option>
+          <option>Gold Jewellery</option>
+          <option>Silver Ornaments</option>
+          <option>Gold Biscuits</option>
+          <option>Custom Order</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your requirements..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleFormSubmit(this)">✦ Send Enquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-brand">Sharjah Jewellers</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1rem;">Be Precious, Be You</span>
+      <p>Srinagar's most trusted destination for Italian, Arabic, Turkish &amp; Indian jewellery. Crafting memories since decades.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#gold-rate">Gold Rates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Collections</h4>
+      <ul>
+        <li><a href="#">Earrings</a></li>
+        <li><a href="#">Bracelets</a></li>
+        <li><a href="#">Bridal Sets</a></li>
+        <li><a href="#">Rings</a></li>
+        <li><a href="#">Chains &amp; Sets</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">📍 Lal Chowk, Srinagar</a></li>
+        <li><a href="#">📞 +91-XXXXX-XXXXX</a></li>
+        <li><a href="#">📸 Instagram</a></li>
+        <li><a href="#">👍 Facebook</a></li>
+        <li><a href="#">💬 WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 <span class="gold">Sharjah Jewellers</span>. All rights reserved.</span>
+    <span>Lal Chowk · Srinagar · Kashmir</span>
+  </div>
+</footer>
+
+<!-- ════════════ STICKY BOTTOM NAV ════════════ -->
+<nav id="bottom-nav">
+  <a class="bn-item active" href="#hero" onclick="setActive(this)">
+    <span class="bn-icon">🏠</span>Home
+  </a>
+  <a class="bn-item" href="#gold-rate" onclick="setActive(this)">
+    <span class="bn-icon">📊</span>Live
+  </a>
+  <a class="bn-item" href="#gold-rate" onclick="setActive(this);document.getElementById('calcResult').classList.remove('show')">
+    <span class="bn-icon">🧮</span>Calculator
+  </a>
+  <a class="bn-item" href="#contact" onclick="setActive(this)">
+    <span class="bn-icon">💳</span>Enquiry
+  </a>
+  <a class="bn-item" href="#contact" onclick="setActive(this)">
+    <span class="bn-icon">📞</span>Contact
+  </a>
+</nav>
+
+<!-- ════════════ JAVASCRIPT ════════════ -->
+<script>
+/* ── MARQUEE ── */
+const marqueeItems = ['Pure Gold · 24K · 22K','Bridal Collections','Italian Craftsmanship','Arabic Designs','Turkish Artistry','Indian Traditions','Silver Ornaments','Gold Biscuits','Certified Quality','Transparent Pricing'];
+const wrap = document.getElementById('marqueeInner');
+[...marqueeItems,...marqueeItems].forEach(t => {
+  const el = document.createElement('span');
+  el.className = 'marquee-item';
+  el.innerHTML = `${t}<span class="marquee-sep">✦</span>`;
+  wrap.appendChild(el);
+});
+
+/* ── COLLECTIONS ── */
+const colls = [
+  {icon:'💎',name:'Earrings',sub:'Studs, Hoops & Chandeliers'},
+  {icon:'⭕',name:'Gold Bracelets',sub:'Italian & Arabic Styles'},
+  {icon:'🌙',name:'Silver Ornaments',sub:'Pure & Oxidised Silver'},
+  {icon:'💛',name:'Bangles',sub:'Traditional & Modern'},
+  {icon:'👑',name:'Bridal Sets',sub:'Complete Bridal Collections'},
+  {icon:'🥇',name:'Gold Biscuits',sub:'Certified 24K Bullion'},
+  {icon:'📿',name:'Chains & Sets',sub:'Necklaces & Matching Sets'},
+  {icon:'💍',name:'Rings',sub:'Engagement & Casual'},
+];
+const grid = document.getElementById('collGrid');
+colls.forEach((c,i) => {
+  grid.innerHTML += `
+  <div class="coll-card reveal" style="transition-delay:${i*0.07}s">
+    <span class="coll-icon">${c.icon}</span>
+    <div class="coll-name">${c.name}</div>
+    <div class="coll-sub">${c.sub}</div>
+    <div class="coll-arrow">→</div>
+  </div>`;
+});
+
+/* ── WHY POINTS ── */
+const points = [
+  {icon:'✅',title:'Premium Quality',desc:'BIS-certified gold & silver with complete purity documentation.'},
+  {icon:'🏅',title:'Trusted Brand',desc:'25+ years of trust built through every single piece we craft.'},
+  {icon:'✨',title:'Latest Designs',desc:'New collections inspired by global jewellery trends every season.'},
+  {icon:'👰',title:'Bridal Special',desc:'Dedicated bridal consultation and full matching set service.'},
+  {icon:'📋',title:'Transparent Pricing',desc:'No hidden charges. Live gold rates, clear making charge breakdowns.'},
+];
+const wp = document.getElementById('whyPoints');
+points.forEach(p => {
+  wp.innerHTML += `
+  <div class="why-point">
+    <div class="why-icon">${p.icon}</div>
+    <div>
+      <div class="why-point-title">${p.title}</div>
+      <div class="why-point-desc">${p.desc}</div>
+    </div>
+  </div>`;
+});
+
+const feats = [
+  {icon:'🔬',title:'BIS Certified',desc:'Every ornament hall-marked & verified'},
+  {icon:'🚚',title:'Easy Exchange',desc:'Hassle-free buyback at live rates'},
+  {icon:'🎁',title:'Gift Packaging',desc:'Premium gift boxes on every purchase'},
+  {icon:'💬',title:'Expert Advice',desc:'Personal styling & bridal consultation'},
+];
+const wr = document.getElementById('whyRight');
+feats.forEach(f => {
+  wr.innerHTML += `
+  <div class="why-feat reveal">
+    <div class="why-feat-icon">${f.icon}</div>
+    <div class="why-feat-title">${f.title}</div>
+    <div class="why-feat-desc">${f.desc}</div>
+  </div>`;
+});
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('topnav').classList.toggle('scrolled', scrollY > 60);
+});
+
+/* ── REVEAL ON SCROLL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── MOBILE MENU ── */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* ── BOTTOM NAV ACTIVE ── */
+function setActive(el) {
+  document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ── GOLD RATE LIVE SIMULATION ── */
+const base24 = 72450, base22 = 66380;
+function updateRates() {
+  const jitter = () => (Math.random() * 60 - 30)|0;
+  const v24 = base24 + jitter(), v22 = base22 + jitter();
+  document.getElementById('val24k').textContent = v24.toLocaleString('en-IN');
+  document.getElementById('val22k').textContent = v22.toLocaleString('en-IN');
+  const now = new Date();
+  const ts = now.toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('time24k').textContent = `Updated at ${ts}`;
+  document.getElementById('time22k').textContent = `Updated at ${ts}`;
+}
+setInterval(updateRates, 30000);
+
+/* ── CALCULATOR ── */
+function calcGold() {
+  const karat = +document.getElementById('calcKarat').value;
+  const weight = +document.getElementById('calcWeight').value;
+  const making = +document.getElementById('calcMaking').value;
+  if (!weight || weight <= 0) { alert('Please enter a valid weight.'); return; }
+  const rates = {24: base24/10, 22: base22/10, 18: (base24*0.75)/10};
+  const baseRate = rates[karat];
+  const metalVal = baseRate * weight;
+  const makingCharge = metalVal * (making/100);
+  const gst = (metalVal + makingCharge) * 0.03;
+  const total = metalVal + makingCharge + gst;
+  document.getElementById('calcVal').textContent = '₹' + Math.round(total).toLocaleString('en-IN');
+  document.getElementById('calcBreakdown').innerHTML =
+    `Metal Value: ₹${Math.round(metalVal).toLocaleString('en-IN')} &nbsp;|&nbsp; Making: ₹${Math.round(makingCharge).toLocaleString('en-IN')} &nbsp;|&nbsp; GST(3%): ₹${Math.round(gst).toLocaleString('en-IN')}`;
+  const res = document.getElementById('calcResult');
+  res.classList.add('show');
+  res.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+/* ── FORM SUBMIT ── */
+function handleFormSubmit(btn) {
+  btn.textContent = '✓ Enquiry Sent!';
+  btn.style.background = 'linear-gradient(135deg,#16a34a,#4ade80)';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '✦ Send Enquiry';
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 4000);
+}
+
+/* ── RE-OBSERVE DYNAMICALLY ADDED ELEMENTS ── */
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}, 200);
+</script>
+</body>
+</html>
